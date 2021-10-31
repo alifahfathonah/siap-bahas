@@ -37,36 +37,19 @@ function edit(x) {
     }
 }
 
-function fileIzin(x) {
-    $('#fileIzin').modal('show');
+function status(x) {
+    $('#status').modal('show');
 
     $.ajax({
         type: "POST",
         data: {
             id: x
         },
-        url: '<?=base_url();?>datamaster/view',
+        url: '<?=base_url();?>proposal/view_pend',
         dataType: 'json',
         success: function(data) {
             $('[name="idproposal_pendidikan"]').val(data.idproposal_pendidikan);
-            $('[name="file_izin"]').val(data.file_izin);
-        }
-    });
-}
-
-function fileLokasi(x) {
-    $('#fileLokasi').modal('show');
-
-    $.ajax({
-        type: "POST",
-        data: {
-            id: x
-        },
-        url: '<?=base_url();?>datamaster/view',
-        dataType: 'json',
-        success: function(data) {
-            $('[name="idproposal_pendidikan"]').val(data.idproposal_pendidikan);
-            $('[name="file_lokasi"]').val(data.file_lokasi);
+            $('[name="status"]').val(data.status);
         }
     });
 }
@@ -129,10 +112,23 @@ function fileLokasi(x) {
                             <?php endif; ?>
                         </td>
                         <td class="text-center">
+                            <?php if($this->session->userdata('level')=='Administrator' || ($this->session->userdata('level')=='User' && $row['status']=='Baru')): ?>
                             <a href="<?=base_url('proposal/pberkas/').$row['idproposal_pendidikan'];?>"
                                 class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
                                 title="Unggah Berkas"><i class="fas fa-upload"></i>
                             </a>
+                            <?php if($this->session->userdata('level')=='Administrator'): ?>
+                            <a href="#" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top"
+                                title="Ubah Status" onclick="status(<?=$row['idproposal_pendidikan'];?>)"><i
+                                    class="fas fa-sync"></i>
+                            </a>
+                            <?php endif; ?>
+                            <?php if($this->session->userdata('level')=='Administrator' && ($row['status']=='Lolos' || $row['status']=='Pencairan')): ?>
+                            <a href="<?=base_url('proposal/upload_bukti/').$row['idproposal_pendidikan'];?>"
+                                class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"
+                                title="Unggah Bukti Pengecekan"><i class="fas fa-upload"></i>
+                            </a>
+                            <?php endif; ?>
                             <a href="#" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                                 title="Ubah Data" onclick="edit(<?=$row['idproposal_pendidikan'];?>)"><i
                                     class="fas fa-edit"></i>
@@ -140,6 +136,16 @@ function fileLokasi(x) {
                             <a href="<?=base_url('proposal/hapus_pend/');?><?=$row['idproposal_pendidikan'];?>"
                                 class="btn btn-danger btn-sm btn-hapus" data-toggle="tooltip" data-placement="top"
                                 title="Hapus Data"><i class="fas fa-trash"></i> </a>
+                            <?php else: ?>
+                            <?php if($row['status']=='Lolos' || $row['status']=='Pencairan'): ?>
+                            <a href="<?=base_url('proposal/bukti/').$row['idproposal_pendidikan'];?>"
+                                class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"
+                                title="Unduh Bukti Pengecekan"><i class="fas fa-download"></i>
+                            </a>
+                            <?php else: ?>
+                            <span class="btn btn-sm btn-warning">Tidak Ada Action</span>
+                            <?php endif; ?>
+                            <?php endif; ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -253,15 +259,14 @@ function fileLokasi(x) {
         </div>
     </div>
 </div>
-<!-- Modal Upload File Izin -->
-<div class="modal fade" id="fileIzin" data-backdrop="static" data-keyboard="false" tabindex="-1"
-    aria-labelledby="fileIzinLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<!-- Modal Ubah Status -->
+<div class="modal fade" id="status" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="statusLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <form action="<?=base_url('datamaster/up_file_izin');?>" method="post" id="myForm"
-                enctype="multipart/form-data">
+            <form action="<?=base_url('proposal/update_status_pend');?>" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="fileIzinLabel">Upload File Izin</h5>
+                    <h5 class="modal-title" id="statusLabel">Ubah Status</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -270,14 +275,15 @@ function fileLokasi(x) {
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="file_izin">File Izin <span class="text-danger">*</span></label>
+                                <label for="status">Pilih Status <span class="text-danger">*</span></label>
                                 <input type="hidden" name="idproposal_pendidikan">
-                                <input type="hidden" name="file_izin_lama">
-                                <input type="file" class="form-control" id="file_izin" name="file_izin" value=""
-                                    required>
-                                <span class="small text-danger">Type file yang diizinkan <b>.jpg .jpeg .png .pdf</b>.
-                                    Ukuran
-                                    maksimum file <b>2 MB</b>.</span>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="Baru">Baru</option>
+                                    <option value="Verifikasi">Verifikasi</option>
+                                    <option value="Lolos">Lolos</option>
+                                    <option value="Tidak Lolos">Tidak Lolos</option>
+                                    <option value="Pencairan">Pencairan</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -287,49 +293,8 @@ function fileLokasi(x) {
                         Batal</button>
                 </div>
                 <div class="modal-footer float-right">
-                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-upload"></i>
-                        Upload</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- Modal Upload File Lokasi -->
-<div class="modal fade" id="fileLokasi" data-backdrop="static" data-keyboard="false" tabindex="-1"
-    aria-labelledby="fileLokasiLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form action="<?=base_url('datamaster/up_file_lokasi');?>" method="post" id="myForm"
-                enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="fileLokasiLabel">Upload File Lokasi</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="file_lokasi">File Lokasi <span class="text-danger">*</span></label>
-                                <input type="hidden" name="idproposal_pendidikan">
-                                <input type="hidden" name="file_lokasi_lama">
-                                <input type="file" class="form-control" id="file_lokasi" name="file_lokasi" value=""
-                                    required>
-                                <span class="small text-danger">Type file yang diizinkan <b>.jpg .jpeg .png .pdf</b>.
-                                    Ukuran
-                                    maksimum file <b>2 MB</b>.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer float-left">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i>
-                        Batal</button>
-                </div>
-                <div class="modal-footer float-right">
-                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-upload"></i>
-                        Upload</button>
+                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-sync"></i>
+                        Ubah</button>
                 </div>
             </form>
         </div>

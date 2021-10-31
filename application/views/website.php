@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>SIAP AMANDEMEN</title>
+    <title>SIAP BAHAS</title>
 
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
@@ -242,10 +242,11 @@
                         </div>
                         <div class="copyright-text">
                             <a href="#">
-                                <h4 class="d-none d-md-block">&nbspS I P &nbsp&nbsp A M A N D E M E N</h4>
+                                <h4 class="d-none d-md-block">&nbsp&nbsp&nbsp&nbspS I A P &nbsp&nbsp&nbsp B A
+                                    H A S</h4>
                                 <p class="d-none d-md-block" style="font-size:8pt;">Biro Administrasi Pelaksanaan
                                     Otonomi Khusus SETDA PAPUA BARAT</p>
-                                <h4 class="d-md-none">S I P A M A N D E M E N</h4>
+                                <h4 class="d-md-none">&nbspS I A P &nbsp&nbsp&nbsp B A H A S</h4>
                                 <p class="d-md-none" style="font-size:7pt;">Biro Administrasi Pelaksanaan Otonomi Khusus
                                     SETDA PAPUA BARAT</p>
                             </a>

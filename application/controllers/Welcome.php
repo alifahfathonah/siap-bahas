@@ -9,13 +9,15 @@ class Welcome extends CI_Controller {
 		parent::__construct();
 		date_default_timezone_set("Asia/Jayapura");
 		$this->load->model('proposal_m');
-		$this->load->model('kabupaten_m');
+		// $this->load->model('kabupaten_m');
+		$this->load->model('kategori_m');
 	}
 	
 	public function index()
 	{
 		$data['content'] = 'v_home';
-		$data['kabupaten'] = $this->kabupaten_m->getAll();
+		// $data['kabupaten'] = $this->kabupaten_m->getAll();
+		$data['kategori'] = $this->kategori_m->getAll();
 		$this->load->view('website',$data);
 	}
 

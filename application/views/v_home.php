@@ -18,7 +18,7 @@
                 </div>
             </div> -->
             <div class="swiper-slide"
-                style="background-image: url(<?=base_url('assets/website/');?>images/slide1.jpeg);">
+                style="background-image: url(<?=base_url('assets/website/');?>images/slide2.jpg);">
                 <div class="content-outer">
                     <div class="content-box justify-content-center">
                         <div class="inner text-center">
@@ -110,13 +110,13 @@
     <div class="auto-container">
         <div class="row m-0 justify-content-md-between align-items-end">
             <div class="sec-title light">
-                <h1>DAFTAR KABUPATEN</h1>
+                <h1>KATEGORI PROPOSAL</h1>
             </div>
         </div>
         <div class="wrapper-box">
             <div class="row">
                 <!-- Team Blokc One -->
-                <?php foreach($kabupaten as $row): ?>
+                <?php foreach($kategori as $row): ?>
                 <div class="col-lg-4 team-block-one">
                     <div class="inner-box wow fadeInDown" data-wow-delay="200ms">
                         <div class="image">
@@ -125,8 +125,8 @@
                             </a>
                         </div>
                         <div class="lower-content">
-                            <h4> <a href="<?=base_url('welcome/view/'.encrypt_url($row['idkabupaten']));?>"
-                                    class="text-uppercase"><?= $row['nama_kabupaten']; ?></a>
+                            <h4> <a href="<?=base_url('welcome/view/'.encrypt_url($row['idkategori']));?>"
+                                    class="text-uppercase"><?= $row['nama_kategori']; ?></a>
                             </h4>
                         </div>
                     </div>

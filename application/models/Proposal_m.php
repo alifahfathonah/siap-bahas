@@ -14,6 +14,7 @@ class Proposal_m extends CI_Model {
         return $this->db->select('x.*,x1.*,x2.*')
                         ->join('kabupaten x1','x1.idkabupaten=x.kabupaten_id')
                         ->join('kategori x2','x2.idkategori=x.kategori_id')
+                        ->order_by('x.idproposal_pendidikan','DESC')
                         ->get($this->tablePend.' x')->result_array();
     }
 
@@ -21,6 +22,7 @@ class Proposal_m extends CI_Model {
         return $this->db->select('x.*,x1.*,x2.*')
                         ->join('kabupaten x1','x1.idkabupaten=x.kabupaten_id')
                         ->join('kategori x2','x2.idkategori=x.kategori_id')
+                        ->order_by('x.idproposal_umum','DESC')
                         ->get($this->tableUmum.' x')->result_array();
     }
 
@@ -49,6 +51,10 @@ class Proposal_m extends CI_Model {
 
     public function tambahBerkasPend($data){
         $this->db->insert('proposal_pendidikan_berkas',$data);
+    }
+
+    public function tambahBerkasUmum($data){
+        $this->db->insert('proposal_umum_berkas',$data);
     }
 
     public function tambahDataPend($data){

@@ -73,31 +73,48 @@ function namaKabupaten($id){
     return $data->nama_kabupaten;
     
 }
-function cek_berkas_status($param,$idberkas,$idproposal){
+function cek_berkas_pendidikan_status($idberkas,$idproposal){
     $ci =& get_instance();
-    if($param=='pberkas'){
-        $data = $ci->db->get_where('proposal_pendidikan_berkas',['proposal_pendidikan_id'=>$idproposal,'berkas_id'=>$idberkas,])->num_rows();
-        return $data;
-        // if($data==0){
-        //     return false;
-        // }else{
-        //     return true;
-        // }
-    }else{
-        $data = $ci->db->get_where('proposal_umum_berkas',['berkas_id'=>$idberkas,'proposal_umum_id'=>$idproposal])->num_rows();
-        if($data==0){
-            return false;
-        }else{
-            return true;
-        }
+    $data = $ci->db->get_where('proposal_pendidikan_berkas',['berkas_id'=>$idberkas,'proposal_pendidikan_id'=>$idproposal])->num_rows();
+    if($data!=0){
+        return true;
     }
+    return false;
+}
+function cek_berkas_umum_status($idberkas,$idproposal){
+    $ci =& get_instance();
+    $data = $ci->db->get_where('proposal_umum_berkas',['berkas_id'=>$idberkas,'proposal_umum_id'=>$idproposal])->num_rows();
+    if($data!=0){
+        return true;
+    }
+    return false;
+}
+function berkas_pendidikan($idberkas,$idproposal){
+    
+    $ci =& get_instance();
+    $data = $ci->db->get_where('proposal_pendidikan_berkas',['berkas_id'=>$idberkas,'proposal_pendidikan_id'=>$idproposal])->row();
+    return $data;
     
 }
-function idJenisUsaha($nama){
+function berkas_umum($idberkas,$idproposal){
     
     $ci =& get_instance();
-    $data = $ci->db->get_where('jenis_usaha',['jenis_usaha'=>$nama])->row();
-    return $data->idjenis_usaha;
+    $data = $ci->db->get_where('proposal_umum_berkas',['berkas_id'=>$idberkas,'proposal_umum_id'=>$idproposal])->row();
+    return $data;
+    
+}
+function namaProPendidikan($id){
+    
+    $ci =& get_instance();
+    $data = $ci->db->get_where('proposal_pendidikan',['idproposal_pendidikan'=>$id])->row();
+    return $data->nama_lengkap;
+    
+}
+function namaProUmum($id){
+    
+    $ci =& get_instance();
+    $data = $ci->db->get_where('proposal_umum',['idproposal_umum'=>$id])->row();
+    return $data->nama;
     
 }
 function totalJenisUsaha($id){

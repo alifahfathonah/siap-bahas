@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SIAP AMANDEMEN</title>
+    <title>SIAP BAHAS</title>
     <style>
     .uppercase {
         text-transform: uppercase;
@@ -60,7 +60,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SIP <sup>AMANDEMEN</sup></div>
+                <div class="sidebar-brand-text mx-3">SIAP <sup>BAHAS</sup></div>
             </a>
 
             <!-- Divider -->
@@ -205,7 +205,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Sistem Informasi Perizinan Lingkungan <?= date('Y'); ?></span>
+                        <span>Copyright &copy; SIAP AMANDEMEN <?= date('Y'); ?></span>
                     </div>
                 </div>
             </footer>
