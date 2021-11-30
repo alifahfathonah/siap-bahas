@@ -29,8 +29,9 @@ class Welcome extends CI_Controller {
 
 	public function view($id){
 		$id = decrypt_url($id);
-		// $data['data_by_kabupaten'] = $this->datamaster_m->getDataByJenisUsaha($id);
-		$data['content'] = 'v_data_by_kabupaten';
+		$data['p_pendidikan'] = $this->proposal_m->getProPendidikanByKategori($id);
+		$data['p_umum'] = $this->proposal_m->getProUmumByKategori($id);
+		$data['content'] = 'v_data_by_kategori';
 		$this->load->view('website',$data);
 	}
 

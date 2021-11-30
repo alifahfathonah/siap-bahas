@@ -73,6 +73,13 @@ function namaKabupaten($id){
     return $data->nama_kabupaten;
     
 }
+function namaKategori($id){
+    
+    $ci =& get_instance();
+    $data = $ci->db->get_where('kategori',['idkategori'=>$id])->row();
+    return $data->nama_kategori;
+    
+}
 function cek_berkas_pendidikan_status($idberkas,$idproposal){
     $ci =& get_instance();
     $data = $ci->db->get_where('proposal_pendidikan_berkas',['berkas_id'=>$idberkas,'proposal_pendidikan_id'=>$idproposal])->num_rows();
@@ -117,10 +124,10 @@ function namaProUmum($id){
     return $data->nama;
     
 }
-function totalJenisUsaha($id){
+function total($tb){
     
     $ci =& get_instance();
-    return $ci->db->get_where('data_usaha',['jenis_usaha_id'=>$id])->num_rows();
+    return $ci->db->get($tb)->num_rows();
     
     
 }

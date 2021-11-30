@@ -70,11 +70,11 @@ function status(x) {
                 <thead>
                     <tr>
                         <th width="25">NO</th>
-                        <th>KAB.</th>
                         <th>KATEGORI</th>
                         <th>NAMA</th>
                         <th>PEMOHON</th>
                         <th>KEGIATAN</th>
+                        <th>KAB.</th>
                         <th>STATUS</th>
                         <th width="100">AKSI</th>
                     </tr>
@@ -83,11 +83,11 @@ function status(x) {
                     <?php $n=1; foreach($all_data as $row): ?>
                     <tr>
                         <td><?= $n++; ?></td>
-                        <td><?= strtoupper($row['nama_kabupaten']); ?></td>
                         <td><?= strtoupper($row['kode_kategori']); ?></td>
                         <td><?= ucwords($row['nama']); ?></td>
                         <td><?= ucwords($row['pemohon']); ?></td>
                         <td><?= ucfirst($row['kegiatan']); ?></td>
+                        <td><?= strtoupper($row['nama_kabupaten']); ?></td>
                         <td align="center">
                             <?php if($row['status']=='Baru'): ?>
                             <span class="badge badge-secondary"><?= $row['status']; ?></span>

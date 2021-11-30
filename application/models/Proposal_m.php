@@ -42,12 +42,21 @@ class Proposal_m extends CI_Model {
                         ->get($this->tableUmum.' x')->row_array();
     }
 
-    // public function getDataByJenisUsaha($id){
-    //     return $this->db->select('x.*,x1.*')
-    //                     ->join('jenis_usaha x1','x1.idjenis_usaha=x.jenis_usaha_id')
-    //                     ->where('x.jenis_usaha_id',$id)
-    //                     ->get($this->table.' x')->result_array();
-    // }
+    public function getProPendidikanByKategori($id){
+        return $this->db->select('x.*,x1.*,x2.*')
+                        ->join('kategori x1','x1.idkategori=x.kategori_id')
+                        ->join('kabupaten x2','x2.idkabupaten=x.kabupaten_id')
+                        ->where('x.kategori_id',$id)
+                        ->get($this->tablePend.' x')->result_array();
+    }
+
+    public function getProUmumByKategori($id){
+        return $this->db->select('x.*,x1.*,x2.*')
+                        ->join('kategori x1','x1.idkategori=x.kategori_id')
+                        ->join('kabupaten x2','x2.idkabupaten=x.kabupaten_id')
+                        ->where('x.kategori_id',$id)
+                        ->get($this->tableUmum.' x')->result_array();
+    }
 
     public function tambahBerkasPend($data){
         $this->db->insert('proposal_pendidikan_berkas',$data);

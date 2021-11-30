@@ -38,7 +38,10 @@
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
-                        <h2 class="p-4 text-gray-900 border-bottom-primary">SIAP AMANDEMEN</h2>
+                        <h2 class="p-4 text-gray-900 border-bottom-primary">
+                            <!-- <marquee behavior="scroll" direction="left">SIAP BAHAS</marquee> -->
+                            SIAP BAHAS
+                        </h2>
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-5 d-none d-lg-block text-center mt-1 pl-5">
@@ -58,9 +61,9 @@
                                             <input type="password" class="form-control form-control-user"
                                                 placeholder="Password" name="password" required>
                                         </div>
-                                        <p>
+                                        <!-- <p>
                                             Belum punya akun ? <a href="<?=base_url('register');?>">Buat Akun</a>
-                                        </p>
+                                        </p> -->
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>

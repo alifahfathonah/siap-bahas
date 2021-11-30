@@ -173,7 +173,7 @@
             </div>
             <!--Link Btn-->
             <div class="link-btn mb-50">
-                <a href="<?=base_url('welcome/information');?>" class="theme-btn btn-style-one"><span>Semua
+                <a href="<?=base_url('welcome/information');?>" class="theme-btn btn-style-seven"><span>Semua
                         Informasi</span></a>
             </div>
         </div>

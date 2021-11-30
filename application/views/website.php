@@ -112,7 +112,7 @@
                                 </div> -->
                                 <div class="link-btn">
                                     <a href="<?=base_url('login');?>"
-                                        class="theme-btn btn-style-one"><span>PROPOSAL</span></a>
+                                        class="theme-btn btn-style-seven"><span>PROPOSAL</span></a>
                                 </div>
                             </div>
                         </div>
